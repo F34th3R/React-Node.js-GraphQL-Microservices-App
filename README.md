@@ -15,7 +15,7 @@ $ yarn watch
 ```
 
 ## Don't forget
-## To migrate the tables...
+### To migrate the tables...
 ```bash
 $ docker ps
 $ docker exec -it ['container ID'] bash
