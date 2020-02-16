@@ -7,9 +7,12 @@ import resolvers from '#root/graphql/resolvers'
 import typeDefs from '#root/graphql/typeDefs'
 import accesEnv from '#root/helpers/accessEnv'
 
+import formatGraphQLErrors from './formatGraphQLErrors'
+
 const PORT = accesEnv('PORT', 7000)
 
 const apolloServer = new ApolloServer({
+  formatError: formatGraphQLErrors,
   resolvers,
   typeDefs
 })
@@ -25,7 +28,11 @@ app.use(
   })
 )
 
-apolloServer.applyMiddleware({ app, cors: false, path: '/graphql'})
+apolloServer.applyMiddleware({
+  app,
+  cors: false,
+  path: '/graphql'
+})
 
 app.listen(PORT, '0.0.0.0', () => {
   console.info(`API gateway listening on ${PORT}`)
