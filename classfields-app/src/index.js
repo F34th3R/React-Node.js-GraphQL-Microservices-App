@@ -1,9 +1,10 @@
+import "@babel/polyfill"
 import React from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { render } from 'react-dom'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 
-import { Root } from '#root/components/Root/Root'
+import { Root } from '#root/components/Root'
 import * as theme from './theme'
 
 import { graphqlClient } from '#root/api/graphqlClient'

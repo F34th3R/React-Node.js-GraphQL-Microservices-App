@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/react-hooks'
-import gpl from 'graphql-tag'
+import gql from 'graphql-tag'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
@@ -41,14 +41,21 @@ const mutation = gql`
 `
 
 export const Login = () => {
+  const [createUserSession] = useMutation(mutation)
+
   const {
     formState: { isSubmitting },
     handleSubmit,
     register
   } = useForm()
 
-  const onSubmit = handleSubmit(({ email, password }) => {
-    console.log(email, password)
+  const onSubmit = handleSubmit(async ({ email, password }) => {
+    const result = await createUserSession({ 
+      variables: { 
+        email, password 
+      }
+    })
+    console.log(result)
   })
 
   return(
