@@ -32,6 +32,10 @@ const StyledorSignUp = styled.span`
   font-size: 0.9rem;
 `
 
+const StyledOrSignUp = styled.span`
+  font-size: .9rem;
+`
+
 const mutation = gql`
   mutation($email: String!, $password: String!) {
     createUserSession(email: $email, password: $password) {
@@ -44,7 +48,7 @@ const mutation = gql`
   }
 `
 
-export const Login = () => {
+export const Login = ({ oncChangeToSignUp: pushChangeToSignUp }) => {
   const dispatch = useDispatch()
   const [createUserSession] = useMutation(mutation)
 
@@ -94,6 +98,13 @@ export const Login = () => {
       <StyledLoginButton disabled={isSubmitting} type="submit">
         Login
       </StyledLoginButton>
+      {' '}
+      <StyledOrSignUp>
+        or <a href="#" onClick={e => {
+          e.preventDefault()
+          pushChangeToSignUp()
+        }}>Signup</a>
+      </StyledOrSignUp>
     </form>
   )
 }
