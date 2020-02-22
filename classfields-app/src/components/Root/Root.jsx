@@ -12,7 +12,7 @@ import { AcountDetails } from './AcountDetails'
 const StyledContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  width: 80rem;
+  max-width: 80rem;
   margin: 0 auto;
 `
 
@@ -38,8 +38,8 @@ const query = gql`
     userSession(me: true) {
       id
       user {
-        id
         email
+        id
       }
     }
   }
@@ -48,17 +48,19 @@ const query = gql`
 export const Root = () => {
   const dispatch = useDispatch()
   const [initialised, setInitialised] = useState(false)
-  
+
   useEffect(() => {
     graphqlClient.query({ query }).then(({ data }) => {
+      console.log(data)
       if (data.userSession) {
-        dispatch(setSession(data.userSession));
+        console.log(data.userSession)
+        dispatch(setSession(data.userSession))
       }
-      setInitialised(true);
+      setInitialised(true)
     })
   }, [])
 
-  if (!initialised) return 'Loaging...'
+  if (!initialised) return "Loading..."
 
   return(
     <StyledWrapper>

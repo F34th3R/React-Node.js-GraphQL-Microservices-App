@@ -62881,7 +62881,7 @@ exports.cache = cache;
 var graphqlClient = new _apolloClient.ApolloClient({
   cache: cache,
   link: new _apolloLinkHttp.HttpLink({
-    creadentials: 'include',
+    credentials: 'include',
     uri: "http://localhost:7000" + '/graphql'
   })
 });
@@ -65343,7 +65343,7 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  {\n    userSession(me: true) {\n      id\n      user {\n        id\n        email\n      }\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  {\n    userSession(me: true) {\n      id\n      user {\n        email\n        id\n      }\n    }\n  }\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -65383,7 +65383,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-flow: row nowrap;\n  width: 80rem;\n  margin: 0 auto;\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-flow: row nowrap;\n  max-width: 80rem;\n  margin: 0 auto;\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -65417,15 +65417,17 @@ var Root = function Root() {
       query: query
     }).then(function (_ref) {
       var data = _ref.data;
+      console.log(data);
 
       if (data.userSession) {
+        console.log(data.userSession);
         dispatch((0, _session.setSession)(data.userSession));
       }
 
       setInitialised(true);
     });
   }, []);
-  if (!initialised) return 'Loaging...';
+  if (!initialised) return "Loading...";
   return _react.default.createElement(StyledWrapper, null, _react.default.createElement(StyledContainer, null, _react.default.createElement(StyledContent, null, "Content"), _react.default.createElement(StyledSidebar, null, _react.default.createElement(_AcountDetails.AcountDetails, null))));
 };
 
