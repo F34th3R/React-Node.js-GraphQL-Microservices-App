@@ -65155,10 +65155,44 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 var _reactRedux = require("react-redux");
 
+var _graphqlTag = _interopRequireDefault(require("graphql-tag"));
+
+var _reactHooks = require("@apollo/react-hooks");
+
+var _session = require("#root/store/ducks/session");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _templateObject2() {
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\nmutation($sessionId: ID!) {\n  deleteUserSession(sessionId: $sessionId)\n}\n"]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
   var data = _taggedTemplateLiteral(["\n  color: ", ";\n  font-size: .9rem;\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n  color: blue;\n  display: block;\n  margin-top: .25rem;\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -65183,19 +65217,41 @@ var StyledEmail = _styledComponents.default.div(_templateObject(), function (pro
   return props.theme.nero;
 });
 
-var StyledWrapper = _styledComponents.default.div(_templateObject2(), function (props) {
+var StyledLogoutLink = _styledComponents.default.a.attrs({
+  href: '#'
+})(_templateObject2());
+
+var StyledWrapper = _styledComponents.default.div(_templateObject3(), function (props) {
   return props.theme.mortar;
 });
 
+var mutation = (0, _graphqlTag.default)(_templateObject4());
+
 var Acount = function Acount() {
+  var dispatch = (0, _reactRedux.useDispatch)();
+
+  var _useMutation = (0, _reactHooks.useMutation)(mutation),
+      _useMutation2 = _slicedToArray(_useMutation, 1),
+      deleteUserSession = _useMutation2[0];
+
   var session = (0, _reactRedux.useSelector)(function (state) {
     return state.session;
   });
-  return _react.default.createElement(StyledWrapper, null, "Logged in as", _react.default.createElement(StyledEmail, null, session.user.email));
+  return _react.default.createElement(StyledWrapper, null, "Logged in as", _react.default.createElement(StyledEmail, null, session.user.email), _react.default.createElement(StyledLogoutLink, {
+    onClick: function onClick(e) {
+      e.preventDefault();
+      dispatch((0, _session.clearSession)());
+      deleteUserSession({
+        variables: {
+          sessionId: session.id
+        }
+      });
+    }
+  }, "(Logout)"));
 };
 
 exports.Acount = Acount;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","react-redux":"../node_modules/react-redux/es/index.js"}],"components/Root/AcountDetails/Acount/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","react-redux":"../node_modules/react-redux/es/index.js","graphql-tag":"../node_modules/graphql-tag/src/index.js","@apollo/react-hooks":"../node_modules/@apollo/react-hooks/lib/react-hooks.esm.js","#root/store/ducks/session":"store/ducks/session.js"}],"components/Root/AcountDetails/Acount/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
