@@ -8,6 +8,7 @@ import { graphqlClient } from '#root/api/graphqlClient'
 import { setSession } from '#root/store/ducks/session'
 
 import { AcountDetails } from './AcountDetails'
+import { Listings } from './Listings'
 
 const StyledContainer = styled.div`
   display: flex;
@@ -51,9 +52,7 @@ export const Root = () => {
 
   useEffect(() => {
     graphqlClient.query({ query }).then(({ data }) => {
-      console.log(data)
       if (data.userSession) {
-        console.log(data.userSession)
         dispatch(setSession(data.userSession))
       }
       setInitialised(true)
@@ -66,7 +65,7 @@ export const Root = () => {
     <StyledWrapper>
       <StyledContainer>
         <StyledContent>
-          Content
+          <Listings />
         </StyledContent>
         <StyledSidebar>
           <AcountDetails />

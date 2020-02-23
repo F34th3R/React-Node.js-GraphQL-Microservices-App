@@ -76033,7 +76033,324 @@ Object.defineProperty(exports, "AcountDetails", {
 });
 
 var _AcountDetails = require("./AcountDetails");
-},{"./AcountDetails":"components/Root/AcountDetails/AcountDetails.jsx"}],"components/Root/Root.jsx":[function(require,module,exports) {
+},{"./AcountDetails":"components/Root/AcountDetails/AcountDetails.jsx"}],"components/shared/StyledTextarea.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.StyledTextarea = void 0;
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  display: block;\n  font-size: 0.9rem;\n  padding: 0.25rem;\n  box-sizing: border-box;\n  border: 1px solid ", ";\n  resize: vertical;\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var StyledTextarea = _styledComponents.default.textarea(_templateObject(), function (props) {
+  return props.theme.veryLightGrey;
+});
+
+exports.StyledTextarea = StyledTextarea;
+},{"styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js"}],"components/Root/Listings/AddListings/AddListings.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.AddListings = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+var _reactRedux = require("react-redux");
+
+var _reactHooks = require("@apollo/react-hooks");
+
+var _graphqlTag = _interopRequireDefault(require("graphql-tag"));
+
+var _reactHookForm = require("react-hook-form");
+
+var _StyledTextInput = require("#root/components/shared/StyledTextInput");
+
+var _StyledTextarea = require("#root/components/shared/StyledTextarea");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _templateObject5() {
+  var data = _taggedTemplateLiteral(["\n  mutation($description: String!, $title: String!) {\n    createListing(description: $description, title: $title) {\n      id\n    }\n  }\n"]);
+
+  _templateObject5 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\n  margin-top: 0.5rem;\n"]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n  display: block;\n  font-size: 0.9rem;\n  margin-bottom: 0.5rem;\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n  display: block;\n  :not(:first-child) {\n    margin-top: 0.5rem;\n  }\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n  background-color: ", ";\n  margin-top: 1rem;\n  padding: 1rem;\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var StyledForm = _styledComponents.default.form(_templateObject(), function (props) {
+  return props.theme.whiteSmoke;
+});
+
+var StyledLabel = _styledComponents.default.label(_templateObject2());
+
+var StyledLabelText = _styledComponents.default.strong(_templateObject3());
+
+var StyledButton = _styledComponents.default.button(_templateObject4());
+
+var mutation = (0, _graphqlTag.default)(_templateObject5());
+
+var AddListings = function AddListings(_ref) {
+  var pushAddListing = _ref.onAddListing;
+
+  var _useMutation = (0, _reactHooks.useMutation)(mutation),
+      _useMutation2 = _slicedToArray(_useMutation, 1),
+      createListing = _useMutation2[0];
+
+  var _useForm = (0, _reactHookForm.useForm)(),
+      isSubmitting = _useForm.formState.isSubmitting,
+      handleSubmit = _useForm.handleSubmit,
+      register = _useForm.register,
+      reset = _useForm.reset;
+
+  var onSubmit = handleSubmit(
+  /*#__PURE__*/
+  function () {
+    var _ref2 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee(_ref3) {
+      var title, description;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              title = _ref3.title, description = _ref3.description;
+              _context.next = 3;
+              return createListing({
+                variables: {
+                  title: title,
+                  description: description
+                }
+              });
+
+            case 3:
+              reset();
+              pushAddListing();
+
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function (_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }());
+  return _react.default.createElement(StyledForm, {
+    onSubmit: onSubmit
+  }, _react.default.createElement(StyledLabel, null, _react.default.createElement(StyledLabelText, null, "Title"), _react.default.createElement(_StyledTextInput.StyledTextInput, {
+    disabled: isSubmitting,
+    name: "title",
+    ref: register,
+    type: "text"
+  })), _react.default.createElement(StyledLabel, null, _react.default.createElement(StyledLabelText, null, "Description"), _react.default.createElement(_StyledTextarea.StyledTextarea, {
+    disabled: isSubmitting,
+    name: "description",
+    ref: register
+  })), _react.default.createElement(StyledButton, {
+    disabled: isSubmitting,
+    type: "submit"
+  }, "Add Listing"));
+};
+
+exports.AddListings = AddListings;
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","react-redux":"../node_modules/react-redux/es/index.js","@apollo/react-hooks":"../node_modules/@apollo/react-hooks/lib/react-hooks.esm.js","graphql-tag":"../node_modules/graphql-tag/src/index.js","react-hook-form":"../node_modules/react-hook-form/dist/react-hook-form.es.js","#root/components/shared/StyledTextInput":"components/shared/StyledTextInput.jsx","#root/components/shared/StyledTextarea":"components/shared/StyledTextarea.jsx"}],"components/Root/Listings/AddListings/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "AddListings", {
+  enumerable: true,
+  get: function () {
+    return _AddListings.AddListings;
+  }
+});
+
+var _AddListings = require("./AddListings");
+},{"./AddListings":"components/Root/Listings/AddListings/AddListings.jsx"}],"components/Root/Listings/Listings.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Listings = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+var _reactHooks = require("@apollo/react-hooks");
+
+var _graphqlTag = _interopRequireDefault(require("graphql-tag"));
+
+var _AddListings = require("./AddListings");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\n  {\n    listings {\n      id\n      title\n      description\n    }\n  }\n"]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n  display: block;\n  font-size: 1.5rem;\n  font-weight: 700;\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n  padding: 1rem 0;\n\n  :not(:last-child) {\n    border-bottom: 1px solid ", "\n  }\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n  margin-bottom: 0;\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var StyledDescription = _styledComponents.default.p(_templateObject());
+
+var StyledListing = _styledComponents.default.div(_templateObject2(), function (props) {
+  return props.theme.veryLightGrey;
+});
+
+var StyledTitle = _styledComponents.default.strong(_templateObject3());
+
+var query = (0, _graphqlTag.default)(_templateObject4());
+
+var Listings = function Listings() {
+  var _useQuery = (0, _reactHooks.useQuery)(query),
+      data = _useQuery.data,
+      loading = _useQuery.loading,
+      refetch = _useQuery.refetch;
+
+  if (loading) return 'Loading...';
+  return _react.default.createElement("div", null, _react.default.createElement("div", null, data.listings.map(function (listing) {
+    return _react.default.createElement(StyledListing, {
+      key: listing.id
+    }, _react.default.createElement(StyledTitle, null, listing.title), _react.default.createElement(StyledDescription, null, listing.description));
+  })), _react.default.createElement(_AddListings.AddListings, {
+    onAddListing: function onAddListing() {
+      return refetch();
+    }
+  }));
+};
+
+exports.Listings = Listings;
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","@apollo/react-hooks":"../node_modules/@apollo/react-hooks/lib/react-hooks.esm.js","graphql-tag":"../node_modules/graphql-tag/src/index.js","./AddListings":"components/Root/Listings/AddListings/index.js"}],"components/Root/Listings/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "Listings", {
+  enumerable: true,
+  get: function () {
+    return _Listings.Listings;
+  }
+});
+
+var _Listings = require("./Listings");
+},{"./Listings":"components/Root/Listings/Listings.jsx"}],"components/Root/Root.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -76054,6 +76371,8 @@ var _graphqlClient = require("#root/api/graphqlClient");
 var _session = require("#root/store/ducks/session");
 
 var _AcountDetails = require("./AcountDetails");
+
+var _Listings = require("./Listings");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -76144,10 +76463,8 @@ var Root = function Root() {
       query: query
     }).then(function (_ref) {
       var data = _ref.data;
-      console.log(data);
 
       if (data.userSession) {
-        console.log(data.userSession);
         dispatch((0, _session.setSession)(data.userSession));
       }
 
@@ -76155,11 +76472,11 @@ var Root = function Root() {
     });
   }, []);
   if (!initialised) return "Loading...";
-  return _react.default.createElement(StyledWrapper, null, _react.default.createElement(StyledContainer, null, _react.default.createElement(StyledContent, null, "Content"), _react.default.createElement(StyledSidebar, null, _react.default.createElement(_AcountDetails.AcountDetails, null))));
+  return _react.default.createElement(StyledWrapper, null, _react.default.createElement(StyledContainer, null, _react.default.createElement(StyledContent, null, _react.default.createElement(_Listings.Listings, null)), _react.default.createElement(StyledSidebar, null, _react.default.createElement(_AcountDetails.AcountDetails, null))));
 };
 
 exports.Root = Root;
-},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","graphql-tag":"../node_modules/graphql-tag/src/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","#root/api/graphqlClient":"api/graphqlClient.js","#root/store/ducks/session":"store/ducks/session.js","./AcountDetails":"components/Root/AcountDetails/index.js"}],"components/Root/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","graphql-tag":"../node_modules/graphql-tag/src/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","#root/api/graphqlClient":"api/graphqlClient.js","#root/store/ducks/session":"store/ducks/session.js","./AcountDetails":"components/Root/AcountDetails/index.js","./Listings":"components/Root/Listings/index.js"}],"components/Root/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -76215,13 +76532,15 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.veryLightGrey = exports.nero = exports.mortar = void 0;
+exports.whiteSmoke = exports.veryLightGrey = exports.nero = exports.mortar = void 0;
 var mortar = '#555555';
 exports.mortar = mortar;
 var nero = '#222222';
 exports.nero = nero;
 var veryLightGrey = '#CCCCCC';
 exports.veryLightGrey = veryLightGrey;
+var whiteSmoke = '#F8F8F8';
+exports.whiteSmoke = whiteSmoke;
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
 
